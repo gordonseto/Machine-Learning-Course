@@ -75,3 +75,11 @@ plt.title('Profit vs R&D Spend (Training Set)')
 plt.xlabel('R&D Spend')
 plt.ylabel('Profit')
 plt.show()
+
+# Visualizing the Test set results
+plt.scatter(X_test[:, 2], y_test, c='red')
+plt.plot(X_train[:, 2], regressor.predict(X_train[:, 2].reshape(-1, 1)), c='blue')
+plt.title('Profie vs R&D Spend(Test Set)')
+plt.xlabel('R&D Spend')
+plt.ylabel('Profit')
+plt.show()
