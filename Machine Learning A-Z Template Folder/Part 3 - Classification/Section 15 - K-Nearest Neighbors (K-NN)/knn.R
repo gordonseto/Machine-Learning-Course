@@ -1,4 +1,4 @@
-# Classification Template
+# K-Nearest Neighbors (K-NN)
 
 # Importing the dataset
 dataset = read.csv('Social_Network_Ads.csv')
@@ -16,12 +16,12 @@ test_set = subset(dataset, split == FALSE)
 training_set[, 1:2] = scale(training_set[, 1:2])
 test_set[, 1:2] = scale(test_set[, 1:2])
 
-# Fitting Classifier to the Training Set
-# Create classifier here
-
-# Predicting the Test set results
-prob_pred = predict(classifier, type = 'response', newdata = test_set[-3])
-y_pred = ifelse(prob_pred > 0.5, 1, 0)
+# Fitting KNN to the Training set and Predicting the Test set results
+library(class)
+y_pred = knn(train = training_set[, -3], 
+             test = test_set[, -3], 
+             cl = training_set[, 3], 
+             k = 5)
 
 # Making the Confusion Matrix
 cm = table(test_set[, 3], y_pred)
@@ -34,8 +34,10 @@ X1 = seq(min(set[, 1] - 1), max(set[, 1] + 1), by = 0.01)
 X2 = seq(min(set[, 2] - 1), max(set[, 1] + 1), by = 0.01)
 grid_set = expand.grid(X1, X2)
 colnames(grid_set) = c('Age', 'EstimatedSalary')
-prob_set = predict(classifier, type = 'response', newdata = grid_set)
-y_grid = predict(classifier, newdata = grid_set)
+y_grid = knn(train = set[, -3], 
+             test = grid_set, 
+             cl = set[, 3], 
+             k = 5)
 plot(set[, -3],
      main = 'Classifier (Training Set)',
      xlab = 'Age', ylab = 'Estimated Salary',
@@ -49,8 +51,10 @@ X1 = seq(min(set[, 1] - 1), max(set[, 1] + 1), by = 0.01)
 X2 = seq(min(set[, 2] - 1), max(set[, 1] + 1), by = 0.01)
 grid_set = expand.grid(X1, X2)
 colnames(grid_set) = c('Age', 'EstimatedSalary')
-prob_set = predict(classifier, type = 'response', newdata = grid_set)
-y_grid = predict(classifier, newdata = grid_set)
+y_grid = knn(train = set[, -3], 
+             test = grid_set, 
+             cl = set[, 3], 
+             k = 5)
 plot(set[, -3],
      main = 'Classifier (Test Set)',
      xlab = 'Age', ylab = 'Estimated Salary',

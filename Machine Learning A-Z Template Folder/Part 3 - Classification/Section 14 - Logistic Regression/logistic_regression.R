@@ -21,7 +21,7 @@ classifier = glm(formula = Purchased ~ .,
                  data = training_set,
                  family = binomial)
 
-# Prediciting the Test set results
+# Predicting the Test set results
 prob_pred = predict(classifier, type = 'response', newdata = test_set[-3])
 y_pred = ifelse(prob_pred > 0.5, 1, 0)
 
