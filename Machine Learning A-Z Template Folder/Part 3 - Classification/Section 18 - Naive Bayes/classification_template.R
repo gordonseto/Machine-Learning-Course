@@ -1,4 +1,4 @@
-# Kernel SVM
+# Classification template
 
 # Importing the dataset
 dataset = read.csv('Social_Network_Ads.csv')
@@ -21,11 +21,6 @@ test_set[-3] = scale(test_set[-3])
 
 # Fitting classifier to the Training set
 # Create your classifier here
-library(e1071)
-classifier = svm(formula =  Purchased ~ .,
-                 data = training_set,
-                 type = 'C-classification',
-                 kernel = 'radial')
 
 # Predicting the Test set results
 y_pred = predict(classifier, newdata = test_set[-3])
