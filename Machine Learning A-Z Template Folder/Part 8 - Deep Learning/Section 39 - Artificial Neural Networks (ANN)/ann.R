@@ -28,10 +28,19 @@ test_set[-11] = scale(test_set[-11])
 # install.packages('h2o')
 library(h2o)
 h2o.init(nthreads = -1)
-
+classifier = h2o.deeplearning(y = 'Exited', 
+                              training_frame = as.h2o(training_set),
+                              activation = 'Rectifier',
+                              hidden = c(6, 6),
+                              epochs = 100,
+                              train_samples_per_iteration = -2)
 
 # Predicting the Test set results
-y_pred = predict(classifier, newdata = test_set[-3])
+prob_pred = h2o.predict(classifier, newdata = as.h2o(test_set[-11]))
+y_pred = (prob_pred > 0.5)
+y_pred = as.vector(y_pred)
 
 # Making the Confusion Matrix
-cm = table(test_set[, 3], y_pred)
+cm = table(test_set[, 11], y_pred)
+
+h2o.shutdown()
